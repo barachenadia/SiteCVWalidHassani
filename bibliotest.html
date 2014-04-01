@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>vCard Walid HASSANI</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styleglobal.css">
+
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+
+
+<script>
+
+//when the page has loaded, run this function
+$(document).ready(function () {
+ //hide all sections tagged with the class "section" by default
+    $('.section').hide();
+    //when an h2 element is clicked
+    $('p').click(function () {
+        //add the class "open" (which changes the bg image to minus)
+        $(this).toggleClass("open");
+        //proceed to the next style and and make the hidden element 
+        //visible; or if it's shown, make it hidden
+        $(this).next().toggle();
+    }); //end toggle
+
+    //when the Expand All button is clicked
+    $('#expandall').click(function () {
+        //Show all elements marked with the "section" class
+        $('.section').show();
+        //and add the class "open" to the h2 element
+        $('p').addClass("open");
+    });
+
+    //when the collapseall section is clicked
+    $('#collapseall').click(function () {
+        //hide all elements tagged with the "section" class
+        $('.section').hide();
+        //and remove the "open" class from the h2 element (this 
+        //removes the minus sign graphic)
+        $('p').removeClass("open");
+    });
+
+}); //end ready
+</script>
+
+<style type="text/css">
+
+    .bs-example{
+        margin: 10px;
+    }
+</style>
+
+
+</head>
+<body>
+<!-- form -->
+<form action="" id="quicksearch">
+<input type="text" id="qs_field" autocomplete="off" placeholder="Type to search..." /> <input type="button" onclick="clearQS()" value="clear" />
+<span id="searchstat">Matching entries: <span id="stat">0</span></span>
+<div id="showsettings" onclick="toggleSettings()">settings...</div>
+<div id="settings" class="hidden">
+<ul>
+<li><input type="checkbox" class="search_setting" id="opt_searchAbs" onchange="updateSetting(this)"><label for="opt_searchAbs"> include abstract</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_searchRev" onchange="updateSetting(this)"><label for="opt_searchRev"> include review</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_useRegExp" onchange="updateSetting(this)"><label for="opt_useRegExp"> use RegExp</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_noAccents" onchange="updateSetting(this)"><label for="opt_noAccents"> ignore accents</label></li>
+</ul>
+</div>
+</form>
+<!-- @end form -->
+
+
+
+<div class="bs-example">
+    <table class="table" id="qs_table" >
+        <thead>
+            <tr >
+                <th>Author</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Journal/proceeding</th>
+                <th>Reftype</th>
+                <th>DOI/URL</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- Article 2011 -->
+            <tr class="successblue" id="hassani2011anactive" class="entry">
+                
+                <td id="font_anonymous">Hassani, W., Mohammed, S. and Amirat, Y.</td>
+                <td>
+                    <strong id="font_anonymous"> An Actuated Orthosis to Assist Knee Joint Movements 
+                    </strong>
+
+                    <p style = "color : blue; cursor: pointer;">[Bibtex]</p>
+                       <div class="section">
+                            <b>BibTeX</b>:
+                            <pre>@misc{<br>hassani2011anactive,<br>author = {Walid Hassani and Samer Mohammed and Yacine Amirat},<br>title = {An Actuated Orthosis to Assist Knee Joint Movements},<br>year = {2011}
+                                      }
+                             </pre>
+                        </div>
+                </td>
+                <td id="font_anonymous">2011</td>
+                <td></td>
+                <td id="font_anonymous">misc</td>
+                <td></td>
+            </tr>
+
+        
+
+            <tr class="successblue" id="hassani2011anactive" class="entry">
+                <td id="font_anonymous">Hassani, W., Mohammed, S. and Amirat, Y.</td>
+                <td id="font_anonymous">Cognitive interaction between lower limb and knee joint actuated orthosis 
+                    <p style = "color : blue; cursor: pointer;">[Bibtex]</p>
+                       <div class="section">
+                            <b>BibTeX</b>:
+                            <pre>@misc{<br>hassani2011anactive,<br>author = {Walid Hassani and Samer Mohammed and Yacine Amirat},<br>title = {An Actuated Orthosis to Assist Knee Joint Movements},<br>year = {2011}
+                                      }
+                             </pre>
+                       </div>
+                </td>
+                <td id="font_anonymous">2011</td>
+                <td></td>
+                <td id="font_anonymous">misc</td>
+                <td id="font_anonymous"><a href="http://whassani.fr/wp-content/uploads/2014/03/Hassani-Presentation-JNRI-2011.pptx">URL</a>&nbsp;</td>
+            </tr>
+            
+            <tr class="successblue" id="hassani2011anactive" class="entry">
+                <td id="font_anonymous">Mohammed, S., Amirat, Y. and Hassani, W.</td>
+                <td id="font_anonymous">An active knee joint orthosis to assist human lower limbs movements 
+                    <p style = "color : blue; cursor: pointer;">[Bibtex]</p>
+                       <div class="section">
+                            <b>BibTeX</b>:
+                            <pre>@misc{<br>hassani2011anactive,<br>author = {Walid Hassani and Samer Mohammed and Yacine Amirat},<br>title = {An Actuated Orthosis to Assist Knee Joint Movements},<br>year = {2011}
+                                      }
+                             </pre>
+                        </div>
+
+                </td>
+                <td id="font_anonymous">2011</td>
+                <td id="font_anonymous">1st International Congress in Scientific Testing of Orthotic Devices&nbsp;</td>
+                <td id="font_anonymous">conference</td>
+                <td id="font_anonymous"><a href="Conference website site : http://www.stod2011.univ-savoie.fr/Programme.html Presentation (PowerPoint format) : http://whassani.fr/wp-content/uploads/2014/03/STOD2011">URL</a>&nbsp; </td>
+            </tr>
+
+            <tr class="successblue" id="hassani2011anactive" class="entry">
+                <td id="font_anonymous">Rifai, H., Hassani, W., Mohammed, S. and Amirat, Y.</td>
+                <td id="font_anonymous" >Bounded control of an actuated lower limb orthosis 
+                    <ul class="list-inline">
+                        <li>
+                           <p style = "color : blue; cursor: pointer;">[Abstract]</p>
+                       <div class="section">
+                            <b>Abstract</b>:
+                           <pre> This paper presents two rehabilitation approaches of the lower limb: passive and active. The passive one ensures repetitive motions of the limb without any effort delivered by the wearer. Within the active one, a humanâ€“exoskeleton interaction approach is proposed. It allows us to provide a knee joint torque support, adapted according to the intention and ability of the wearer, for assistance-as-needed. The wearer's intention is estimated using a realistic model of the muscles actuating the knee joint. The identiï¬?cation process concerns the inertial parameters of the shank-foot-exoskeleton and the musculotendinous parameters. Experiments were conducted online on a healthy subject and have shown satisfactory results in terms of tracking error, intention detection and passive- rehabilitation/active-assistance.
+                            </pre> 
+                        </div> 
+
+
+                        </li>
+                        <li>
+                            <p style = "color : blue; cursor: pointer;">[Bibtex]</p>
+                       <div class="section">
+                            <b>BibTeX</b>:
+                            <pre>@misc{<br>hassani2011anactive,<br>author = {Walid Hassani and Samer Mohammed and Yacine Amirat},<br>title = {An Actuated Orthosis to Assist Knee Joint Movements},<br>year = {2011}
+                                      }
+                             </pre>
+                        </div>
+
+                        </li>
+                    </ul>
+                    
+                  </td>
+                <td id="font_anonymous">2011</td>
+                <td id="font_anonymous">Decision and Control and European Control Conference (CDC-ECC), 2011 50th IEEE Conference on, pp. 873-878&nbsp;</td>
+                <td id="font_anonymous">inproceedings</td>
+                <td id="font_anonymous"><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&amp;amp;arnumber=6160993&amp;amp;queryText%3DBounded+control+of+an+actuated+lower+limb+orthosis">URL</a>&nbsp;</td>
+            </tr>
+
+         <!-- /Article 2011 -->
+
+
+         <!-- ARTICLE 2012 -->
+            <tr class="active">
+                <td id="font_anonymous">Hassani, W., Mohammed, S. and Amirat, Y.</td>
+                <td id="font_anonymous">An EMG-driven Lower Limb Powered orthosis for Movement Restoration <span class="infolinks">[<a href="javascript:toggleInfo('hassani2012emg','bibtex')">BibTeX</a>]</span></td>
+                <td id="font_anonymous">2012</td>
+                <td></td>
+                <td id="font_anonymous">misc</td>
+                <td id="font_anonymous"></td>
+            </tr>
+
+        <!-- /ARTICLE 2012 -->
+
+
+        <!-- ARTICLE 2013 -->
+            <tr class="warning">
+                <td id="font_anonymous">Hassani, W., Mohammed, S. and Amirat, Y.</td>
+                <td id="font_anonymous">Real-Time EMG driven Lower Limb Actuated Orthosis for Assistance As Needed Movement Strategy <p class="infolinks">[<a href="javascript:toggleInfo('hassani2013real','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('hassani2013real','bibtex')">BibTeX</a>]</p></td>
+                <td>2013</td>
+                <td id="font_anonymous">Proceedings of Robotics: Science and Systems , RSS&nbsp;</td>
+                <td id="font_anonymous">inproceedings</td>
+                <td id="font_anonymous"><a href="http://www.roboticsproceedings.org/rss09/p54.html http://whassani.fr/wp-content/uploads/2014/03/HASSANI-Presentation-RSS2013.pptx http://whassani.fr/wp-content/uploads/2014/03/HASSANI-Presentation-RSS2013.pdf">URL</a>&nbsp;</td>
+            </tr>
+            <tr class="warning">
+                <td id="font_anonymous">Hassani, W., Mohammed, S., Rifai, H. and Amirat, Y.</td>
+                <td id="font_anonymous">EMG Based Approach for Wearer-centered Control of a Knee Joint Actuated Orthosis <p class="infolinks">[<a href="javascript:toggleInfo('hassani2013emg','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('hassani2013emg','bibtex')">BibTeX</a>]</p></td>
+                <td id="font_anonymous">2013</td>
+                <td id="font_anonymous">Intelligent Robots and Systems (IROS), 2013 IEEE/RSJ International Conference on, pp. 990-995&nbsp;</td>
+                <td id="font_anonymous">inproceedings</td>
+                <td id="font_anonymous"><a href="http://ieeexplore.ieee.org/xpl/login.jsp?tp=&amp;amp;arnumber=6696471&amp;amp;url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D6696471">URL</a>&nbsp;</td>
+            </tr>
+
+             <tr class="warning">
+                <td>Lalami, M.E., Rifai, H., Mohammed, S., Hassani, W., Fried, G. and Amirat, Y.</td>
+                <td>Output feedback control of an actuated lower limb orthosis with bounded input <p class="infolinks">[<a href="javascript:toggleInfo('lalami2013output','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('lalami2013output','bibtex')">BibTeX</a>]</p></td>
+                <td>2013</td>
+                <td>Industrial Robot: An International Journal<br/>Vol. 40(6), pp. 541-549&nbsp;</td>
+                <td>article</td>
+                <td><a href="http://dx.doi.org/10.1108/IR-05-2013-363">URL</a>&nbsp;</td>
+            </tr>
+<tr class="warning">
+     <td>Mohammed, S., Rifai, H., Hassani, W. and Amirat, Y.</td>
+    <td>Human-based Lower Limb Movement Assistance and Rehabilitation through an Actuated Orthosis <p class="infolinks">[<a href="javascript:toggleInfo('mohammed2013human','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('mohammed2013human','bibtex')">BibTeX</a>]</p></td>
+    <td>2013</td>
+    <td>in International Symposium on Wearable Robotics for Motion Assistance and Rehabilitation -RoboAssist&nbsp;</td>
+    <td>inproceedings</td>
+    <td><a href="http://www.neurotechnix.org/Abstracts/2013/RoboAssist_2013_Abstracts.htm">URL</a>&nbsp;</td>
+
+</tr>
+   
+<tr class="warning" >
+    <td>Rifai, H., Mohammed, S., Hassani, W. and Amirat, Y.</td>
+    <td>Nested saturation based control of an actuated knee joint orthosis <p class="infolinks">[<a href="javascript:toggleInfo('rifai2013nested','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('rifai2013nested','bibtex')">BibTeX</a>]</p></td>
+    <td>2013</td>
+    <td>Mechatronics<br/>Vol. 23(8), pp. 1141-1149&nbsp;</td>
+    <td>article</td>
+    <td><a href="http://dx.doi.org/10.1016/j.mechatronics.2013.09.007">URL</a>&nbsp;</td>
+    </tr>
+
+
+
+<tr class="success_green" >
+    <td>Hassani, W., Mohammed, S., Rifai, H. and Amirat, Y.</td>
+    <td>Powered orthosis for lower limb movements assistance and rehabilitation <p class="infolinks">[<a href="javascript:toggleInfo('hassani2014powered','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('hassani2014powered','bibtex')">BibTeX</a>]</p></td>
+    <td>2014</td>
+    <td>Control Engineering Practice<br/>Vol. 26(C), pp. 245-253&nbsp;</td>
+    <td>article</td>
+    <td><a href="http://dx.doi.org/10.1016/j.conengprac.2014.02.002">URL</a>&nbsp;</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+    </body>
+    </html>                                               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

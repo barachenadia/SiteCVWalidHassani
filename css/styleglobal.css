@@ -1,3 +1,19 @@
+ @font-face {
+    font-family: 'anonymous_proregular';
+    src: url('anonymous_pro-webfont.eot');
+    src: url('anonymous_pro-webfont.eot?#iefix') format('embedded-opentype'),
+         url('anonymous_pro-webfont.woff') format('woff'),
+         url('anonymous_pro-webfont.ttf') format('truetype'),
+         url('anonymous_pro-webfont.svg#anonymous_proregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+#font_anonymous{
+  font-family: 'anonymous_proregular';
+}
+
  body {
     background-image:url(../images/bg3.png);
     background-color: #E8E8E8;
@@ -215,3 +231,11 @@
     margin-left: 61px;
     border-top: 1px solid black;
   }
+  .successblue{
+    background-color: #def0f7
+  }
+  .success_green{
+    background-color: #d9f7c1
+  }
+
+  
