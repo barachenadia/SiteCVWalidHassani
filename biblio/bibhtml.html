@@ -1,0 +1,671 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>JabRef references</title>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,800,700,400italic|PT+Serif:400,400italic"/>
+
+
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 3.0
+//
+// Copyright (c) 2006-2011, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+//
+// Features:
+// - intuitive find-as-you-type searching
+//    ~ case insensitive
+//    ~ ignore diacritics (optional)
+//
+// - search with/without Regular Expressions
+// - match BibTeX key
+//
+
+// Search settings
+var searchAbstract = true;	// search in abstract
+var searchReview = true;	// search in review
+
+var noSquiggles = true; 	// ignore diacritics when searching
+var searchRegExp = false; 	// enable RegExp searches
+
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// check for quick search table and searchfield
+	if (!document.getElementById('qs_table')||!document.getElementById('quicksearch')) { return; }
+
+	// load all the rows and sort into arrays
+	loadTableData();
+	
+	//find the query field
+	qsfield = document.getElementById('qs_field');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+	
+	// set up preferences
+	initPreferences();
+
+	// shows the searchfield
+	document.getElementById('quicksearch').style.display = 'block';
+	document.getElementById('qs_field').onkeyup = quickSearch;
+}
+
+function loadTableData() {
+	// find table and appropriate rows
+	searchTable = document.getElementById('qs_table');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, review, bibtex)
+	entryRows = new Array(); infoRows = new Array(); absRows = new Array(); revRows = new Array();
+
+	// get data from each row
+	entryRowsData = new Array(); absRowsData = new Array(); revRowsData = new Array(); 
+	
+	BibTeXKeys = new Array();
+	
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.match(/entry/)) {
+			entryRows[j] = allRows[i];
+			entryRowsData[j] = stripDiacritics(getTextContent(allRows[i]));
+			allRows[i].id ? BibTeXKeys[j] = allRows[i].id : allRows[i].id = 'autokey_'+j;
+			j ++;
+		} else {
+			infoRows[k++] = allRows[i];
+			// check for abstract/review
+			if (allRows[i].className.match(/abstract/)) {
+				absRows.push(allRows[i]);
+				absRowsData[j-1] = stripDiacritics(getTextContent(allRows[i]));
+			} else if (allRows[i].className.match(/review/)) {
+				revRows.push(allRows[i]);
+				revRowsData[j-1] = stripDiacritics(getTextContent(allRows[i]));
+			}
+		}
+	}
+	//number of entries and rows
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+	numAbs = absRows.length;
+	numRev = revRows.length;
+}
+
+function quickSearch(){
+	
+	tInput = qsfield;
+
+	if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		t = stripDiacritics(tInput.value);
+
+		if(!searchRegExp) { t = escapeRegExp(t); }
+			
+		// only search for valid RegExp
+		try {
+			textRegExp = new RegExp(t,"i");
+			closeAllInfo();
+			qsfield.className = '';
+		}
+			catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		if(cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			if (entryRowsData[i].search(textRegExp) != -1 || BibTeXKeys[i].search(textRegExp) != -1){ 
+				found = true;
+			} else {
+				if(searchAbstract && absRowsData[i]!=undefined) {
+					if (absRowsData[i].search(textRegExp) != -1){ found=true; } 
+				}
+				if(searchReview && revRowsData[i]!=undefined) {
+					if (revRowsData[i].search(textRegExp) != -1){ found=true; } 
+				}
+			}
+			
+			if (found){
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+
+// Strip Diacritics from text
+// http://stackoverflow.com/questions/990904/javascript-remove-accents-in-strings
+
+// String containing replacement characters for stripping accents 
+var stripstring = 
+    'AAAAAAACEEEEIIII'+
+    'DNOOOOO.OUUUUY..'+
+    'aaaaaaaceeeeiiii'+
+    'dnooooo.ouuuuy.y'+
+    'AaAaAaCcCcCcCcDd'+
+    'DdEeEeEeEeEeGgGg'+
+    'GgGgHhHhIiIiIiIi'+
+    'IiIiJjKkkLlLlLlL'+
+    'lJlNnNnNnnNnOoOo'+
+    'OoOoRrRrRrSsSsSs'+
+    'SsTtTtTtUuUuUuUu'+
+    'UuUuWwYyYZzZzZz.';
+
+function stripDiacritics(str){
+
+    if(noSquiggles==false){
+        return str;
+    }
+
+    var answer='';
+    for(var i=0;i<str.length;i++){
+        var ch=str[i];
+        var chindex=ch.charCodeAt(0)-192;   // Index of character code in the strip string
+        if(chindex>=0 && chindex<stripstring.length){
+            // Character is within our table, so we can strip the accent...
+            var outch=stripstring.charAt(chindex);
+            // ...unless it was shown as a '.'
+            if(outch!='.')ch=outch;
+        }
+        answer+=ch;
+    }
+    return answer;
+}
+
+// http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
+// NOTE: must escape every \ in the export code because of the JabRef Export...
+function escapeRegExp(str) {
+  return str.replace(/[-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+}
+
+function toggleInfo(articleid,info) {
+
+	var entry = document.getElementById(articleid);
+	var abs = document.getElementById('abs_'+articleid);
+	var rev = document.getElementById('rev_'+articleid);
+	var bib = document.getElementById('bib_'+articleid);
+	
+	if (abs && info == 'abstract') {
+		abs.className.indexOf('noshow') == -1?abs.className = 'abstract noshow':abs.className = 'abstract show';
+	} else if (rev && info == 'review') {
+		rev.className.indexOf('noshow') == -1?rev.className = 'review noshow':rev.className = 'review show';
+	} else if (bib && info == 'bibtex') {
+		bib.className.indexOf('noshow') == -1?bib.className = 'bibtex noshow':bib.className = 'bibtex show';
+	} else { 
+		return;
+	}
+
+	// check if one or the other is available
+	var revshow; var absshow; var bibshow;
+	(abs && abs.className.indexOf('noshow') == -1)? absshow = true: absshow = false;
+	(rev && rev.className.indexOf('noshow') == -1)? revshow = true: revshow = false;	
+	(bib && bib.className.indexOf('noshow') == -1)? bibshow = true: bibshow = false;
+	
+	// highlight original entry
+	if(entry) {
+		if (revshow || absshow || bibshow) {
+		entry.className = 'entry highlight show';
+		} else {
+		entry.className = 'entry show';
+		}
+	}
+	
+	// When there's a combination of abstract/review/bibtex showing, need to add class for correct styling
+	if(absshow) {
+		(revshow||bibshow)?abs.className = 'abstract nextshow':abs.className = 'abstract';
+	} 
+	if (revshow) {
+		bibshow?rev.className = 'review nextshow': rev.className = 'review';
+	}	
+	
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1 && node.className != "infolinks") { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	closeAllInfo();
+	for (var i = 0; i < numEntries; i++){ entryRows[i].className = 'entry show'; }
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function clearQS() {
+	qsfield.value = '';
+	showAll();
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+
+function updateSetting(obj){
+	var option = obj.id;
+	var checked = obj.value;
+
+	switch(option)
+	 {
+	 case "opt_searchAbs":
+	   searchAbstract=!searchAbstract;
+	   redoQS();
+	   break;
+	 case "opt_searchRev":
+	   searchReview=!searchReview;
+	   redoQS();
+	   break;
+	 case "opt_useRegExp":
+	   searchRegExp=!searchRegExp;
+	   redoQS();
+	   break;
+	 case "opt_noAccents":
+	   noSquiggles=!noSquiggles;
+	   loadTableData();
+	   redoQS();
+	   break;
+	 }
+}
+
+function initPreferences(){
+	if(searchAbstract){document.getElementById("opt_searchAbs").checked = true;}
+	if(searchReview){document.getElementById("opt_searchRev").checked = true;}
+	if(noSquiggles){document.getElementById("opt_noAccents").checked = true;}
+	if(searchRegExp){document.getElementById("opt_useRegExp").checked = true;}
+	
+	if(numAbs==0) {document.getElementById("opt_searchAbs").parentNode.style.display = 'none';}
+	if(numRev==0) {document.getElementById("opt_searchRev").parentNode.style.display = 'none';}
+}
+
+function toggleSettings(){
+	var togglebutton = document.getElementById('showsettings');
+	var settings = document.getElementById('settings');
+	
+	if(settings.className == "hidden"){
+		settings.className = "show";
+		togglebutton.innerText = "close settings";
+		togglebutton.textContent = "close settings";
+	}else{
+		settings.className = "hidden";
+		togglebutton.innerText = "settings...";		
+		togglebutton.textContent = "settings...";
+	}
+}
+
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: Arial, sans-serif; font-size: 13px; line-height: 1.2; padding: 1em; color: #2E2E2E; margin: auto 2em; }
+
+form#quicksearch { width: auto; border-style: solid; border-color: gray; border-width: 1px 0px; padding: 0.7em 0.5em; display:none; position:relative; }
+span#searchstat {padding-left: 1em;}
+
+div#settings { margin-top:0.7em; /* border-bottom: 1px transparent solid; background-color: #efefef; border: 1px grey solid; */ }
+div#settings ul {margin: 0; padding: 0; }
+div#settings li {margin: 0; padding: 0 1em 0 0; display: inline; list-style: none; }
+div#settings li + li { border-left: 2px #efefef solid; padding-left: 0.5em;}
+div#settings input { margin-bottom: 0px;}
+
+div#settings.hidden {display:none;}
+
+#showsettings { border: 1px grey solid; padding: 0 0.5em; float:right; line-height: 1.6em; text-align: right; }
+#showsettings:hover { cursor: pointer; }
+
+.invalidsearch { background-color: red; }
+input[type="button"] { background-color: #efefef; border: 1px #2E2E2E solid;}
+
+table { width: 100%; empty-cells: show; border-spacing: 0em 0.2em; margin: 1em 0em; border-style: none; }
+th, td { border: 1px gray solid; border-width: 1px 1px; padding: 0.5em; vertical-align: top; text-align: left; }
+th { background-color: #efefef; }
+td + td, th + th { border-left: none; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+tr.highlight td { background-color: #EFEFEF; border-top: 2px #2E2E2E solid; font-weight: bold; }
+tr.abstract td, tr.review td, tr.bibtex td { background-color: #EFEFEF; text-align: justify; border-bottom: 2px #2E2E2E solid; }
+tr.nextshow td { border-bottom: 1px gray solid; }
+
+tr.bibtex pre { width: 100%; overflow: auto; white-space: pre-wrap;}
+p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
+
+@media print {
+	p.infolinks, #qs_settings, #quicksearch, t.bibtex { display: none !important; }
+	tr { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<form action="" id="quicksearch">
+<input type="text" id="qs_field" autocomplete="off" placeholder="Type to search..." /> <input type="button" onclick="clearQS()" value="clear" />
+<span id="searchstat">Matching entries: <span id="stat">0</span></span>
+<div id="showsettings" onclick="toggleSettings()">settings...</div>
+<div id="settings" class="hidden">
+<ul>
+<li><input type="checkbox" class="search_setting" id="opt_searchAbs" onchange="updateSetting(this)"><label for="opt_searchAbs"> include abstract</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_searchRev" onchange="updateSetting(this)"><label for="opt_searchRev"> include review</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_useRegExp" onchange="updateSetting(this)"><label for="opt_useRegExp"> use RegExp</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_noAccents" onchange="updateSetting(this)"><label for="opt_noAccents"> ignore accents</label></li>
+</ul>
+</div>
+</form>
+<table id="qs_table" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="hassani2012emg" class="entry">
+	<td>Hassani, W., Mohammed, S. and Amirat, Y.</td>
+	<td>An EMG-driven Lower Limb Powered orthosis for Movement Restoration <p class="infolinks">[<a href="javascript:toggleInfo('hassani2012emg','bibtex')">BibTeX</a>]</p></td>
+	<td>2012</td>
+	<td>&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_hassani2012emg" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{hassani2012emg,
+  author = {Walid Hassani and Samer Mohammed and Yacine Amirat},
+  title = {An EMG-driven Lower Limb Powered orthosis for Movement Restoration},
+  year = {2012}
+}
+</pre></td>
+</tr>
+<tr id="hassani2011anactive" class="entry">
+	<td>Hassani, W., Mohammed, S. and Amirat, Y.</td>
+	<td>An Actuated Orthosis to Assist Knee Joint Movements <p class="infolinks">[<a href="javascript:toggleInfo('hassani2011anactive','bibtex')">BibTeX</a>]</p></td>
+	<td>2011</td>
+	<td>&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_hassani2011anactive" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{hassani2011anactive,
+  author = {Walid Hassani and Samer Mohammed and Yacine Amirat},
+  title = {An Actuated Orthosis to Assist Knee Joint Movements},
+  year = {2011}
+}
+</pre></td>
+</tr>
+<tr id="hassani2011cognitive" class="entry">
+	<td>Hassani, W., Mohammed, S. and Amirat, Y.</td>
+	<td>Cognitive interaction between lower limb and knee joint actuated orthosis <p class="infolinks">[<a href="javascript:toggleInfo('hassani2011cognitive','bibtex')">BibTeX</a>]</p></td>
+	<td>2011</td>
+	<td>&nbsp;</td>
+	<td>misc</td>
+	<td><a href="http://whassani.fr/wp-content/uploads/2014/03/Hassani-Presentation-JNRI-2011.pptx">URL</a>&nbsp;</td>
+</tr>
+<tr id="bib_hassani2011cognitive" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{hassani2011cognitive,
+  author = {Walid Hassani and Samer Mohammed and Yacine Amirat},
+  title = {Cognitive interaction between lower limb and knee joint actuated orthosis},
+  publisher = {Journées Nationales de la Robotique Interactive, JNRI’11},
+  year = {2011},
+  url = {http://whassani.fr/wp-content/uploads/2014/03/Hassani-Presentation-JNRI-2011.pptx}
+}
+</pre></td>
+</tr>
+<tr id="hassani2013real" class="entry">
+	<td>Hassani, W., Mohammed, S. and Amirat, Y.</td>
+	<td>Real-Time EMG driven Lower Limb Actuated Orthosis for Assistance As Needed Movement Strategy <p class="infolinks">[<a href="javascript:toggleInfo('hassani2013real','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('hassani2013real','bibtex')">BibTeX</a>]</p></td>
+	<td>2013</td>
+	<td>Proceedings of Robotics: Science and Systems , RSS&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://www.roboticsproceedings.org/rss09/p54.html http://whassani.fr/wp-content/uploads/2014/03/HASSANI-Presentation-RSS2013.pptx http://whassani.fr/wp-content/uploads/2014/03/HASSANI-Presentation-RSS2013.pdf">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_hassani2013real" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: This paper presents a new approach to control a wearable knee joint exoskeleton driven through the wearer’s intention. A realistic bio-inspired musculoskeletal knee joint model is used to control the exoskeleton. This model takes into account changes in muscle length and joint moment arms as well as the dynamics of muscle activation and muscle contraction during lower limb movements. Identification of the model parameters is done through an unconstrained optimization problem formulation. A control law strategy based on the principle of assistance as needed is proposed. This approach guarantees asymptotic stability of the knee joint orthosis and adaptation to human-orthosis interaction. Moreover, the proposed control law is robust with respect to external disturbances. Experimental validations are conducted online on a healthy subject during flexion and extenion of their knee joint. The proposed control strategy has shown satisfactory performances in terms of tracking trajectory and adaptation to human tasks completion.</td>
+</tr>
+<tr id="bib_hassani2013real" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@inproceedings{hassani2013real,
+  author = {Hassani, Walid and Mohammed, Samer and Amirat, Yacine},
+  title = {Real-Time EMG driven Lower Limb Actuated Orthosis for Assistance As Needed Movement Strategy},
+  booktitle = {Proceedings of Robotics: Science and Systems , RSS},
+  year = {2013},
+  url = {http://www.roboticsproceedings.org/rss09/p54.html http://whassani.fr/wp-content/uploads/2014/03/HASSANI-Presentation-RSS2013.pptx http://whassani.fr/wp-content/uploads/2014/03/HASSANI-Presentation-RSS2013.pdf}
+}
+</pre></td>
+</tr>
+<tr id="hassani2014powered" class="entry">
+	<td>Hassani, W., Mohammed, S., Rifai, H. and Amirat, Y.</td>
+	<td>Powered orthosis for lower limb movements assistance and rehabilitation <p class="infolinks">[<a href="javascript:toggleInfo('hassani2014powered','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('hassani2014powered','bibtex')">BibTeX</a>]</p></td>
+	<td>2014</td>
+	<td>Control Engineering Practice<br/>Vol. 26(C), pp. 245-253&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.conengprac.2014.02.002">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_hassani2014powered" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: This paper presents two rehabilitation approaches of the lower limb: passive and active. The passive one ensures repetitive motions of the limb without any effort delivered by the wearer. Within the active one, a human–exoskeleton interaction approach is proposed. It allows us to provide a knee joint torque support, adapted according to the intention and ability of the wearer, for assistance-as-needed. The wearer's intention is estimated using a realistic model of the muscles actuating the knee joint. The identi�?cation process concerns the inertial parameters of the shank-foot-exoskeleton and the musculotendinous parameters. Experiments were conducted online on a healthy subject and have shown satisfactory results in terms of tracking error, intention detection and passive- rehabilitation/active-assistance.</td>
+</tr>
+<tr id="bib_hassani2014powered" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@article{hassani2014powered,
+  author = {Walid Hassani and Samer Mohammed and Hala Rifai and Yacine Amirat},
+  title = {Powered orthosis for lower limb movements assistance and rehabilitation},
+  journal = {Control Engineering Practice},
+  publisher = {Elsevier},
+  year = {2014},
+  volume = {26},
+  number = {C},
+  pages = {245-253},
+  url = {http://dx.doi.org/10.1016/j.conengprac.2014.02.002}
+}
+</pre></td>
+</tr>
+<tr id="hassani2013emg" class="entry">
+	<td>Hassani, W., Mohammed, S., Rifai, H. and Amirat, Y.</td>
+	<td>EMG Based Approach for Wearer-centered Control of a Knee Joint Actuated Orthosis <p class="infolinks">[<a href="javascript:toggleInfo('hassani2013emg','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('hassani2013emg','bibtex')">BibTeX</a>]</p></td>
+	<td>2013</td>
+	<td>Intelligent Robots and Systems (IROS), 2013 IEEE/RSJ International Conference on, pp. 990-995&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://ieeexplore.ieee.org/xpl/login.jsp?tp=&amp;amp;arnumber=6696471&amp;amp;url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D6696471">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_hassani2013emg" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: This paper presents a new human-exoskeleton interaction approach to provide torque assistance of the lower limb movements upon wearer's intention. The exoskeleton interacts with the wearer; the shank-foot orthosis system behaves as a second order dynamic system with gravity and elastic torque balance. The intention of the wearer is estimated by using a realistic musculoskeletal model of the muscles actuating the knee joint. The identification process concerns the inertial parameters of the shank-foot, the exoskeleton and the musculotendon parameters. Real-time experiments, conducted on a healthy subject during flexion and extension movements of the knee joint, have shown satisfactory results in terms of tracking error, intention detection and assistance torque generation. This approach guarantees asymptotic stability of the shank-foot-exoskeleton and adaptation to human- exoskeleton interaction. Moreover, the proposed control law is robust with respect to external disturbances.</td>
+</tr>
+<tr id="bib_hassani2013emg" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@inproceedings{hassani2013emg,
+  author = {Hassani, Walid and Mohammed, Samer and Rifai, Hala and Amirat, Yacine},
+  title = {EMG Based Approach for Wearer-centered Control of a Knee Joint Actuated Orthosis},
+  booktitle = {Intelligent Robots and Systems (IROS), 2013 IEEE/RSJ International Conference on},
+  year = {2013},
+  pages = {990--995},
+  url = {http://ieeexplore.ieee.org/xpl/login.jsp?tp=&amp;amp;amp;arnumber=6696471&amp;amp;amp;url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D6696471}
+}
+</pre></td>
+</tr>
+<tr id="lalami2013output" class="entry">
+	<td>Lalami, M.E., Rifai, H., Mohammed, S., Hassani, W., Fried, G. and Amirat, Y.</td>
+	<td>Output feedback control of an actuated lower limb orthosis with bounded input <p class="infolinks">[<a href="javascript:toggleInfo('lalami2013output','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('lalami2013output','bibtex')">BibTeX</a>]</p></td>
+	<td>2013</td>
+	<td>Industrial Robot: An International Journal<br/>Vol. 40(6), pp. 541-549&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1108/IR-05-2013-363">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_lalami2013output" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Purpose – The purpose of this paper is the control of lower limb orthosis acting at the knee joint level for a passive rehabilitation purpose. Design/methodology/approach – A control law, based on a saturated proportional derivative controller, is proposed in order to drive the shank-foot-orthosis system along a desired trajectory. Findings – The proposed control law is tested in real time using the orthosis EICOSI of the LISSI-Laboratory. The experiments show that the proposed control law is capable of providing satisfactory trajectory tracking performance given only the knee joint angle measurement. Moreover, the control law is robust with respect to external disturbances.</td>
+</tr>
+<tr id="bib_lalami2013output" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@article{lalami2013output,
+  author = {Lalami, Mohamed E and Rifai, Hala and Mohammed, Samer and Hassani, Walid and Fried, Georges and Amirat, Yacine},
+  title = {Output feedback control of an actuated lower limb orthosis with bounded input},
+  journal = {Industrial Robot: An International Journal},
+  publisher = {Emerald Group Publishing Limited},
+  year = {2013},
+  volume = {40},
+  number = {6},
+  pages = {541--549},
+  url = {http://dx.doi.org/10.1108/IR-05-2013-363}
+}
+</pre></td>
+</tr>
+<tr id="hassani2013active" class="entry">
+	<td>Mohammed, S., Amirat, Y. and Hassani, W.</td>
+	<td>An active knee joint orthosis to assist human lower limbs movements <p class="infolinks">[<a href="javascript:toggleInfo('hassani2013active','bibtex')">BibTeX</a>]</p></td>
+	<td>2011</td>
+	<td>1st International Congress in Scientific Testing of Orthotic Devices&nbsp;</td>
+	<td>conference</td>
+	<td><a href="Conference website site : http://www.stod2011.univ-savoie.fr/Programme.html Presentation (PowerPoint format) : http://whassani.fr/wp-content/uploads/2014/03/STOD2011">URL</a>&nbsp;</td>
+</tr>
+<tr id="bib_hassani2013active" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@conference{hassani2013active,
+  author = {Samer Mohammed and Yacine Amirat and Walid Hassani},
+  title = {An active knee joint orthosis to assist human lower limbs movements},
+  booktitle = {1st International Congress in Scientific Testing of Orthotic Devices},
+  year = {2011},
+  url = {Conference website site : http://www.stod2011.univ-savoie.fr/Programme.html Presentation (PowerPoint format) : http://whassani.fr/wp-content/uploads/2014/03/STOD2011}
+}
+</pre></td>
+</tr>
+<tr id="mohammed2013human" class="entry">
+	<td>Mohammed, S., Rifai, H., Hassani, W. and Amirat, Y.</td>
+	<td>Human-based Lower Limb Movement Assistance and Rehabilitation through an Actuated Orthosis <p class="infolinks">[<a href="javascript:toggleInfo('mohammed2013human','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('mohammed2013human','bibtex')">BibTeX</a>]</p></td>
+	<td>2013</td>
+	<td>in International Symposium on Wearable Robotics for Motion Assistance and Rehabilitation -RoboAssist&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://www.neurotechnix.org/Abstracts/2013/RoboAssist_2013_Abstracts.htm">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_mohammed2013human" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: In this paper, an overview of the project EICOSI (Exoskeleton Intelligently COmmunicating and Sensitive to Intention) conducted at the LISSI/UPEC Lab will be presented. This work aims to control a knee joint actuated orthosis while tracking a desired trajectory or following the wearer’s intention. The proposed control strategies ensure satisfactory performances in terms of trajectory tracking, intention detection and torque generation during rehabilitation tasks and assistive movements of the wearer’s lower limbs.</td>
+</tr>
+<tr id="bib_mohammed2013human" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@inproceedings{mohammed2013human,
+  author = {Samer Mohammed and Hala Rifai and Walid Hassani and Yacine Amirat},
+  title = {Human-based Lower Limb Movement Assistance and Rehabilitation through an Actuated Orthosis},
+  booktitle = {in International Symposium on Wearable Robotics for Motion Assistance and Rehabilitation -RoboAssist},
+  year = {2013},
+  url = {http://www.neurotechnix.org/Abstracts/2013/RoboAssist_2013_Abstracts.htm}
+}
+</pre></td>
+</tr>
+<tr id="rifai2011bounded" class="entry">
+	<td>Rifai, H., Hassani, W., Mohammed, S. and Amirat, Y.</td>
+	<td>Bounded control of an actuated lower limb orthosis <p class="infolinks">[<a href="javascript:toggleInfo('rifai2011bounded','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('rifai2011bounded','bibtex')">BibTeX</a>]</p></td>
+	<td>2011</td>
+	<td>Decision and Control and European Control Conference (CDC-ECC), 2011 50th IEEE Conference on, pp. 873-878&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&amp;amp;arnumber=6160993&amp;amp;queryText%3DBounded+control+of+an+actuated+lower+limb+orthosis">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_rifai2011bounded" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Wearable robots have defined a new horizon for elderly and disabled people, to regain control of their limbs, as well as for healthy people, to increase their abilities of hard missions execution. The present paper deals with the control of a lower limb orthosis applied at the knee joint level for rehabilitation purposes. A bounded control torque is developed in order to guarantee the asymptotic stability of the knee orthosis. The control law respects the physical constraints of the system. Moreover, it is robust with respect to external disturbances. The effectiveness of the control torque is tested in real-time using the EICOSI orthosis of the LISSI Lab.</td>
+</tr>
+<tr id="bib_rifai2011bounded" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@inproceedings{rifai2011bounded,
+  author = {Rifai, Hala and Hassani, Walid and Mohammed, Samer and Amirat, Yacine},
+  title = {Bounded control of an actuated lower limb orthosis},
+  booktitle = {Decision and Control and European Control Conference (CDC-ECC), 2011 50th IEEE Conference on},
+  year = {2011},
+  pages = {873--878},
+  url = {http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&amp;amp;amp;arnumber=6160993&amp;amp;amp;queryText%3DBounded+control+of+an+actuated+lower+limb+orthosis}
+}
+</pre></td>
+</tr>
+<tr id="rifai2013nested" class="entry">
+	<td>Rifai, H., Mohammed, S., Hassani, W. and Amirat, Y.</td>
+	<td>Nested saturation based control of an actuated knee joint orthosis <p class="infolinks">[<a href="javascript:toggleInfo('rifai2013nested','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('rifai2013nested','bibtex')">BibTeX</a>]</p></td>
+	<td>2013</td>
+	<td>Mechatronics<br/>Vol. 23(8), pp. 1141-1149&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.mechatronics.2013.09.007">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_rifai2013nested" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Wearable robots have opened a new horizon for assistance and rehabilitation of dependent/elderly persons. The present study deals with the control of an actuated lower limb orthosis at the knee joint level. The dynamics of the shank–foot–orthosis system are expressed through a nonlinear second order model taking into account viscous, inertial and gravitational properties. Shank–foot–orthosis system parameters are identified experimentally. Since the underlying dynamic model is nonlinear, a robust control strategy is needed to guarantee an accurate and precise movement generation. The proposed control strategy ensures, at the same time, the stability of the closed-loop system. A bounded control torque is applied to guarantee the asymptotic stability of the shank– foot–orthosis. The generated control respects the physical constraints imposed by the system. The effectiveness of the proposed control strategy is shown in real-time in terms of stability, position tracking performances and robustness with respect to identification errors and external disturbances.</td>
+</tr>
+<tr id="bib_rifai2013nested" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@article{rifai2013nested,
+  author = {Rifai, Hala and Mohammed, Samer and Hassani, Walid and Amirat, Yacine},
+  title = {Nested saturation based control of an actuated knee joint orthosis},
+  journal = {Mechatronics},
+  publisher = {Elsevier},
+  year = {2013},
+  volume = {23},
+  number = {8},
+  pages = {1141--1149},
+  url = {http://dx.doi.org/10.1016/j.mechatronics.2013.09.007}
+}
+</pre></td>
+</tr>
+</tbody>
+</table>
+<footer>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 26/03/2014.</small>
+</footer>
+<!-- file generated by JabRef -->
+</body>
+</html>
