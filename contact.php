@@ -13,7 +13,16 @@
 <body>
 
 
-  <div class="bs-example">
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <div class="panel panel-default" style ="width: 1012px;
+    margin-left: 94px;margin-top:48px;">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+ <div class="bs-example">
     <ul class="nav nav-pills">
         <li ><a href="index.php"><span class="glyphicon glyphicon-home"></span>  About</a></li>
         <li><a href="resume.php"><span class="glyphicon glyphicon-user"></span> Resume</a></li>
@@ -21,8 +30,12 @@
         <li class="active"><a href="contact.php"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
     </ul>
 </div>
+      
 
-<div class="tab-pane" id="contact">
+    </h3>
+  </div>
+  <div class="panel-body">
+    <div class="tab-pane" >
 
           <!-- Adress -->
           <div class="row">
@@ -35,7 +48,7 @@
               <div class="contact-info">
                 <h3 class="main-heading"><span>Contact info</span></h3>
                 <ul>
-                  <li>45 rue MoliÃ¨re, 94200 Ivry-Sur-Seine, France<br /><br /></li>
+                  <li>45 rue Molère, 94200 Ivry-Sur-Seine, France<br /><br /></li>
                   <li>Email: hassani@whassani.fr</li>
                   <li>Phone: +33 619 137 550</li>
                   <li>Website: www.whassani.fr</li>
@@ -67,7 +80,12 @@
                 </form>
               </div>
             </div>
-            <!-- /Contact Form -->
+  </div>
+</div>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+      <script src="js/bootstrap.min.js"></script>
 
     </body>
     </html>                                               
