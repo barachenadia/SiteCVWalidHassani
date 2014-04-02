@@ -371,8 +371,13 @@ div#settings.hidden {display:none;}
 .invalidsearch { background-color: red; }
 input[type="button"] { background-color: #efefef; border: 1px #2E2E2E solid;}
 
+
+
+
+
 table { width: 100%; empty-cells: show; border-spacing: 0em 0.2em; margin: 1em 0em; border-style: none; }
-th, td { border: 1px gray solid; border-width: 1px 1px; padding: 0.5em; vertical-align: top; text-align: left; }
+
+th, td {  border-width: 1px 1px; padding: 0.5em; vertical-align: top; text-align: left; }
 th { background-color: #efefef; }
 td + td, th + th { border-left: none; }
 
@@ -380,7 +385,7 @@ td a { color: navy; text-decoration: none; }
 td a:hover  { text-decoration: underline; }
 
 tr.noshow { display: none;}
-tr.highlight td { background-color: #EFEFEF; border-top: 2px #2E2E2E solid; font-weight: bold; }
+
 tr.abstract td, tr.review td, tr.bibtex td { background-color: #EFEFEF; text-align: justify; border-bottom: 2px #2E2E2E solid; }
 tr.nextshow td { border-bottom: 1px gray solid; }
 
@@ -391,6 +396,10 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 	p.infolinks, #qs_settings, #quicksearch, t.bibtex { display: none !important; }
 	tr { page-break-inside: avoid; }
 }
+
+
+
+
 </style>
 </head>
 <body>
@@ -408,45 +417,81 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 </ul>
 </div>
 </form>
-<table id="qs_table" border="1">
-<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
-<tbody><tr id="hassani2012emg" class="entry">
-	<td>Hassani, W., Mohammed, S. and Amirat, Y.</td>
-	<td>An EMG-driven Lower Limb Powered orthosis for Movement Restoration <p class="infolinks">[<a href="javascript:toggleInfo('hassani2012emg','bibtex')">BibTeX</a>]</p></td>
-	<td>2012</td>
-	<td>&nbsp;</td>
-	<td>misc</td>
-	<td>&nbsp;</td>
-</tr>
-<tr id="bib_hassani2012emg" class="bibtex noshow">
-<td colspan="6"><b>BibTeX</b>:
-<pre>
-@misc{hassani2012emg,
-  author = {Walid Hassani and Samer Mohammed and Yacine Amirat},
-  title = {An EMG-driven Lower Limb Powered orthosis for Movement Restoration},
-  year = {2012}
-}
-</pre></td>
-</tr>
-<tr id="hassani2011anactive" class="entry">
-	<td>Hassani, W., Mohammed, S. and Amirat, Y.</td>
-	<td>An Actuated Orthosis to Assist Knee Joint Movements <p class="infolinks">[<a href="javascript:toggleInfo('hassani2011anactive','bibtex')">BibTeX</a>]</p></td>
+<table id="qs_table"  class="table table-striped">
+<thead>
+	<tr>
+		<th width="20%">Author</th>
+		<th width="30%">Title</th>
+		<th width="5%">Year</th>
+		<th width="30%">Journal/Proceedings</th>
+		<th width="10%">Reftype</th>
+		<th width="5%">DOI/URL</th>
+	</tr>
+</thead>
+<tbody>
+
+
+
+
+	                 <!-- 2011 -->
+
+<tr id="hassani2013active" class="entry" style ="background-color : #e3f4fa">
+	<td>Mohammed, S., Amirat, Y. and Hassani, W.</td>
+	<td>An active knee joint orthosis to assist human lower limbs movements <p class="infolinks">[<a href="javascript:toggleInfo('hassani2013active','bibtex')">BibTeX</a>]</p></td>
 	<td>2011</td>
-	<td>&nbsp;</td>
-	<td>misc</td>
-	<td>&nbsp;</td>
+	<td>1st International Congress in Scientific Testing of Orthotic Devices&nbsp;</td>
+	<td>conference</td>
+	<td><a href="Conference website site : http://www.stod2011.univ-savoie.fr/Programme.html Presentation (PowerPoint format) : http://whassani.fr/wp-content/uploads/2014/03/STOD2011">URL</a>&nbsp;</td>
 </tr>
-<tr id="bib_hassani2011anactive" class="bibtex noshow">
+<tr id="bib_hassani2013active" class="bibtex noshow">
 <td colspan="6"><b>BibTeX</b>:
 <pre>
-@misc{hassani2011anactive,
-  author = {Walid Hassani and Samer Mohammed and Yacine Amirat},
-  title = {An Actuated Orthosis to Assist Knee Joint Movements},
-  year = {2011}
+@conference{hassani2013active,
+  author = {Samer Mohammed and Yacine Amirat and Walid Hassani},
+  title = {An active knee joint orthosis to assist human lower limbs movements},
+  booktitle = {1st International Congress in Scientific Testing of Orthotic Devices},
+  year = {2011},
+  url = {Conference website site : http://www.stod2011.univ-savoie.fr/Programme.html Presentation (PowerPoint format) : http://whassani.fr/wp-content/uploads/2014/03/STOD2011}
 }
 </pre></td>
 </tr>
-<tr id="hassani2011cognitive" class="entry">
+
+                    <!-- 2011 -->
+
+    <tr id="rifai2011bounded" class="entry" style ="background-color : #e3f4fa">
+	<td>Rifai, H., Hassani, W., Mohammed, S. and Amirat, Y.</td>
+	<td>Bounded control of an actuated lower limb orthosis <p class="infolinks">[<a href="javascript:toggleInfo('rifai2011bounded','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('rifai2011bounded','bibtex')">BibTeX</a>]</p></td>
+	<td>2011</td>
+	<td>Decision and Control and European Control Conference (CDC-ECC), 2011 50th IEEE Conference on, pp. 873-878&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&amp;amp;arnumber=6160993&amp;amp;queryText%3DBounded+control+of+an+actuated+lower+limb+orthosis">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_rifai2011bounded" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Wearable robots have defined a new horizon for elderly and disabled people, to regain control of their limbs, as well as for healthy people, to increase their abilities of hard missions execution. The present paper deals with the control of a lower limb orthosis applied at the knee joint level for rehabilitation purposes. A bounded control torque is developed in order to guarantee the asymptotic stability of the knee orthosis. The control law respects the physical constraints of the system. Moreover, it is robust with respect to external disturbances. The effectiveness of the control torque is tested in real-time using the EICOSI orthosis of the LISSI Lab.</td>
+</tr>
+<tr id="bib_rifai2011bounded" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@inproceedings{rifai2011bounded,
+  author = {Rifai, Hala and Hassani, Walid and Mohammed, Samer and Amirat, Yacine},
+  title = {Bounded control of an actuated lower limb orthosis},
+  booktitle = {Decision and Control and European Control Conference (CDC-ECC), 2011 50th IEEE Conference on},
+  year = {2011},
+  pages = {873--878},
+  url = {http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&amp;amp;amp;arnumber=6160993&amp;amp;amp;queryText%3DBounded+control+of+an+actuated+lower+limb+orthosis}
+}
+</pre></td>
+</tr>
+
+
+
+
+
+	                          
+                          <!-- 2011 -->
+
+
+    <tr id="hassani2011cognitive" class="entry" style ="background-color : #e3f4fa">
 	<td>Hassani, W., Mohammed, S. and Amirat, Y.</td>
 	<td>Cognitive interaction between lower limb and knee joint actuated orthosis <p class="infolinks">[<a href="javascript:toggleInfo('hassani2011cognitive','bibtex')">BibTeX</a>]</p></td>
 	<td>2011</td>
@@ -466,7 +511,59 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 }
 </pre></td>
 </tr>
-<tr id="hassani2013real" class="entry">
+
+                         <!-- 2011 -->
+
+<tr id="hassani2011anactive" class="entry" style ="background-color : #e3f4fa">
+	<td>Hassani, W., Mohammed, S. and Amirat, Y.</td>
+	<td>An Actuated Orthosis to Assist Knee Joint Movements <p class="infolinks">[<a href="javascript:toggleInfo('hassani2011anactive','bibtex')">BibTeX</a>]</p></td>
+	<td>2011</td>
+	<td>&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_hassani2011anactive" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{hassani2011anactive,
+  author = {Walid Hassani and Samer Mohammed and Yacine Amirat},
+  title = {An Actuated Orthosis to Assist Knee Joint Movements},
+  year = {2011}
+}
+</pre>
+</td>
+</tr>
+
+                     
+
+ <!-- 2012 -->
+   
+
+   <tr id="hassani2012emg" class="entry" style = "background-color : #ebe8e8" >
+	<td>Hassani, W., Mohammed, S. and Amirat, Y.</td>
+	<td>An EMG-driven Lower Limb Powered orthosis for Movement Restoration <p class="infolinks">[<a href="javascript:toggleInfo('hassani2012emg','bibtex')">BibTeX</a>]</p></td>
+	<td>2012</td>
+	<td>&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_hassani2012emg" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{hassani2012emg,
+  author = {Walid Hassani and Samer Mohammed and Yacine Amirat},
+  title = {An EMG-driven Lower Limb Powered orthosis for Movement Restoration},
+  year = {2012}
+}
+</pre></td>
+</tr>
+
+
+
+                        
+<!-- 2013 -->
+
+<tr id="hassani2013real" class="entry" style = "background-color : #fcfcd6">
 	<td>Hassani, W., Mohammed, S. and Amirat, Y.</td>
 	<td>Real-Time EMG driven Lower Limb Actuated Orthosis for Assistance As Needed Movement Strategy <p class="infolinks">[<a href="javascript:toggleInfo('hassani2013real','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('hassani2013real','bibtex')">BibTeX</a>]</p></td>
 	<td>2013</td>
@@ -489,34 +586,12 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 }
 </pre></td>
 </tr>
-<tr id="hassani2014powered" class="entry">
-	<td>Hassani, W., Mohammed, S., Rifai, H. and Amirat, Y.</td>
-	<td>Powered orthosis for lower limb movements assistance and rehabilitation <p class="infolinks">[<a href="javascript:toggleInfo('hassani2014powered','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('hassani2014powered','bibtex')">BibTeX</a>]</p></td>
-	<td>2014</td>
-	<td>Control Engineering Practice<br/>Vol. 26(C), pp. 245-253&nbsp;</td>
-	<td>article</td>
-	<td><a href="http://dx.doi.org/10.1016/j.conengprac.2014.02.002">URL</a>&nbsp;</td>
-</tr>
-<tr id="abs_hassani2014powered" class="abstract noshow">
-	<td colspan="6"><b>Abstract</b>: This paper presents two rehabilitation approaches of the lower limb: passive and active. The passive one ensures repetitive motions of the limb without any effort delivered by the wearer. Within the active one, a humanâ€“exoskeleton interaction approach is proposed. It allows us to provide a knee joint torque support, adapted according to the intention and ability of the wearer, for assistance-as-needed. The wearer's intention is estimated using a realistic model of the muscles actuating the knee joint. The identiï¬?cation process concerns the inertial parameters of the shank-foot-exoskeleton and the musculotendinous parameters. Experiments were conducted online on a healthy subject and have shown satisfactory results in terms of tracking error, intention detection and passive- rehabilitation/active-assistance.</td>
-</tr>
-<tr id="bib_hassani2014powered" class="bibtex noshow">
-<td colspan="6"><b>BibTeX</b>:
-<pre>
-@article{hassani2014powered,
-  author = {Walid Hassani and Samer Mohammed and Hala Rifai and Yacine Amirat},
-  title = {Powered orthosis for lower limb movements assistance and rehabilitation},
-  journal = {Control Engineering Practice},
-  publisher = {Elsevier},
-  year = {2014},
-  volume = {26},
-  number = {C},
-  pages = {245-253},
-  url = {http://dx.doi.org/10.1016/j.conengprac.2014.02.002}
-}
-</pre></td>
-</tr>
-<tr id="hassani2013emg" class="entry">
+
+
+
+
+                    <!-- 2013 -->
+<tr id="hassani2013emg" class="entry" style = "background-color : #fcfcd6">
 	<td>Hassani, W., Mohammed, S., Rifai, H. and Amirat, Y.</td>
 	<td>EMG Based Approach for Wearer-centered Control of a Knee Joint Actuated Orthosis <p class="infolinks">[<a href="javascript:toggleInfo('hassani2013emg','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('hassani2013emg','bibtex')">BibTeX</a>]</p></td>
 	<td>2013</td>
@@ -540,7 +615,10 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 }
 </pre></td>
 </tr>
-<tr id="lalami2013output" class="entry">
+
+<!-- 2013 -->
+
+<tr id="lalami2013output" class="entry" style = "background-color : #fcfcd6">
 	<td>Lalami, M.E., Rifai, H., Mohammed, S., Hassani, W., Fried, G. and Amirat, Y.</td>
 	<td>Output feedback control of an actuated lower limb orthosis with bounded input <p class="infolinks">[<a href="javascript:toggleInfo('lalami2013output','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('lalami2013output','bibtex')">BibTeX</a>]</p></td>
 	<td>2013</td>
@@ -567,27 +645,9 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 }
 </pre></td>
 </tr>
-<tr id="hassani2013active" class="entry">
-	<td>Mohammed, S., Amirat, Y. and Hassani, W.</td>
-	<td>An active knee joint orthosis to assist human lower limbs movements <p class="infolinks">[<a href="javascript:toggleInfo('hassani2013active','bibtex')">BibTeX</a>]</p></td>
-	<td>2011</td>
-	<td>1st International Congress in Scientific Testing of Orthotic Devices&nbsp;</td>
-	<td>conference</td>
-	<td><a href="Conference website site : http://www.stod2011.univ-savoie.fr/Programme.html Presentation (PowerPoint format) : http://whassani.fr/wp-content/uploads/2014/03/STOD2011">URL</a>&nbsp;</td>
-</tr>
-<tr id="bib_hassani2013active" class="bibtex noshow">
-<td colspan="6"><b>BibTeX</b>:
-<pre>
-@conference{hassani2013active,
-  author = {Samer Mohammed and Yacine Amirat and Walid Hassani},
-  title = {An active knee joint orthosis to assist human lower limbs movements},
-  booktitle = {1st International Congress in Scientific Testing of Orthotic Devices},
-  year = {2011},
-  url = {Conference website site : http://www.stod2011.univ-savoie.fr/Programme.html Presentation (PowerPoint format) : http://whassani.fr/wp-content/uploads/2014/03/STOD2011}
-}
-</pre></td>
-</tr>
-<tr id="mohammed2013human" class="entry">
+<!-- 2013 -->
+
+<tr id="mohammed2013human" class="entry" style = "background-color : #fcfcd6">
 	<td>Mohammed, S., Rifai, H., Hassani, W. and Amirat, Y.</td>
 	<td>Human-based Lower Limb Movement Assistance and Rehabilitation through an Actuated Orthosis <p class="infolinks">[<a href="javascript:toggleInfo('mohammed2013human','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('mohammed2013human','bibtex')">BibTeX</a>]</p></td>
 	<td>2013</td>
@@ -610,31 +670,8 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 }
 </pre></td>
 </tr>
-<tr id="rifai2011bounded" class="entry">
-	<td>Rifai, H., Hassani, W., Mohammed, S. and Amirat, Y.</td>
-	<td>Bounded control of an actuated lower limb orthosis <p class="infolinks">[<a href="javascript:toggleInfo('rifai2011bounded','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('rifai2011bounded','bibtex')">BibTeX</a>]</p></td>
-	<td>2011</td>
-	<td>Decision and Control and European Control Conference (CDC-ECC), 2011 50th IEEE Conference on, pp. 873-878&nbsp;</td>
-	<td>inproceedings</td>
-	<td><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&amp;amp;arnumber=6160993&amp;amp;queryText%3DBounded+control+of+an+actuated+lower+limb+orthosis">URL</a>&nbsp;</td>
-</tr>
-<tr id="abs_rifai2011bounded" class="abstract noshow">
-	<td colspan="6"><b>Abstract</b>: Wearable robots have defined a new horizon for elderly and disabled people, to regain control of their limbs, as well as for healthy people, to increase their abilities of hard missions execution. The present paper deals with the control of a lower limb orthosis applied at the knee joint level for rehabilitation purposes. A bounded control torque is developed in order to guarantee the asymptotic stability of the knee orthosis. The control law respects the physical constraints of the system. Moreover, it is robust with respect to external disturbances. The effectiveness of the control torque is tested in real-time using the EICOSI orthosis of the LISSI Lab.</td>
-</tr>
-<tr id="bib_rifai2011bounded" class="bibtex noshow">
-<td colspan="6"><b>BibTeX</b>:
-<pre>
-@inproceedings{rifai2011bounded,
-  author = {Rifai, Hala and Hassani, Walid and Mohammed, Samer and Amirat, Yacine},
-  title = {Bounded control of an actuated lower limb orthosis},
-  booktitle = {Decision and Control and European Control Conference (CDC-ECC), 2011 50th IEEE Conference on},
-  year = {2011},
-  pages = {873--878},
-  url = {http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&amp;amp;amp;arnumber=6160993&amp;amp;amp;queryText%3DBounded+control+of+an+actuated+lower+limb+orthosis}
-}
-</pre></td>
-</tr>
-<tr id="rifai2013nested" class="entry">
+
+<tr id="rifai2013nested" class="entry" style = "background-color : #fcfcd6">
 	<td>Rifai, H., Mohammed, S., Hassani, W. and Amirat, Y.</td>
 	<td>Nested saturation based control of an actuated knee joint orthosis <p class="infolinks">[<a href="javascript:toggleInfo('rifai2013nested','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('rifai2013nested','bibtex')">BibTeX</a>]</p></td>
 	<td>2013</td>
@@ -661,11 +698,47 @@ p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
 }
 </pre></td>
 </tr>
-</tbody>
+
+ <!-- 2014 -->
+
+<tr id="hassani2014powered" class="entry" style = "background-color : #ebe8e8">
+	<td>Hassani, W., Mohammed, S., Rifai, H. and Amirat, Y.</td>
+	<td>Powered orthosis for lower limb movements assistance and rehabilitation <p class="infolinks">[<a href="javascript:toggleInfo('hassani2014powered','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('hassani2014powered','bibtex')">BibTeX</a>]</p></td>
+	<td>2014</td>
+	<td>Control Engineering Practice<br/>Vol. 26(C), pp. 245-253&nbsp;</td>
+	<td>article</td>
+	<td><a href="http://dx.doi.org/10.1016/j.conengprac.2014.02.002">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_hassani2014powered" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: This paper presents two rehabilitation approaches of the lower limb: passive and active. The passive one ensures repetitive motions of the limb without any effort delivered by the wearer. Within the active one, a humanâ€“exoskeleton interaction approach is proposed. It allows us to provide a knee joint torque support, adapted according to the intention and ability of the wearer, for assistance-as-needed. The wearer's intention is estimated using a realistic model of the muscles actuating the knee joint. The identiï¬?cation process concerns the inertial parameters of the shank-foot-exoskeleton and the musculotendinous parameters. Experiments were conducted online on a healthy subject and have shown satisfactory results in terms of tracking error, intention detection and passive- rehabilitation/active-assistance.</td>
+</tr>
+<tr id="bib_hassani2014powered" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@article{hassani2014powered,
+  author = {Walid Hassani and Samer Mohammed and Hala Rifai and Yacine Amirat},
+  title = {Powered orthosis for lower limb movements assistance and rehabilitation},
+  journal = {Control Engineering Practice},
+  publisher = {Elsevier},
+  year = {2014},
+  volume = {26},
+  number = {C},
+  pages = {245-253},
+  url = {http://dx.doi.org/10.1016/j.conengprac.2014.02.002}
+}
+</pre></td>
+</tr>
+
+
 </table>
 <footer>
  <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 26/03/2014.</small>
 </footer>
 <!-- file generated by JabRef -->
+
+
+
+
+
 </body>
 </html>
