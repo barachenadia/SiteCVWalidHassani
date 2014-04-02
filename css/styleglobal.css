@@ -238,4 +238,19 @@
     background-color: #d9f7c1
   }
 
-  
+  #panel_default{
+   width: 1012px; 
+   margin-left: 94px;
+   margin-top:48px;
+  }
+#resume_section{
+  margin-left:40px; margin-top:30px; margin-bottom:30px
+}
+
+  #icon_education{
+    color:gainsboro;
+  }
+
+  #tab_pane{
+    margin-top:38px;
+  }
