@@ -5,6 +5,47 @@
   <title>Walid HASSANI</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styleglobal.css">
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+
+
+<script>
+
+
+//when the page has loaded, run this function
+$(document).ready(function () {
+ //hide all sections tagged with the class "section" by default
+    $('.section').hide();
+    //when an h2 element is clicked
+    $('p').click(function () {
+        //add the class "open" (which changes the bg image to minus)
+        $(this).toggleClass("open");
+        //proceed to the next style and and make the hidden element 
+        //visible; or if it's shown, make it hidden
+        $(this).next().toggle();
+    }); //end toggle
+
+    //when the Expand All button is clicked
+    $('#expandall').click(function () {
+        //Show all elements marked with the "section" class
+        $('.section').show();
+        //and add the class "open" to the h2 element
+        $('p').addClass("open");
+    });
+
+    //when the collapseall section is clicked
+    $('#collapseall').click(function () {
+        //hide all elements tagged with the "section" class
+        $('.section').hide();
+        //and remove the "open" class from the h2 element (this 
+        //removes the minus sign graphic)
+        $('p').removeClass("open");
+    });
+
+}); //end ready
+</script>
 </head>
 
 <body>
@@ -40,25 +81,13 @@
                 <h4>Ph.D in Robotics<span class="timelineDate"> expected in june 2014 </span></h4>
                 <h5>University Paris-Est Créteil, France</h5>
                 <p>Dissertation : Human-Based Modeling and Control of lower limb exoskeleton. </p> 
-                <!-- Button trigger modal -->
-                <p data-toggle="modal" data-target="#myModal" style = "cursor:pointer; color : blue">Learn more ...</p> 
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                      </div>
-                      <div class="modal-body">
-                        ...
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <!-- Learn more -->
+                <p style = "color : blue ; cursor: pointer;">Learn more ...</p>
+
+                 <div class="section">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dolor magna, elementum sit amet adipiscing vitae, varius vitaeerat. Phasellus sodales, arcu sit amet facilisis condimentum, magna mifermentum augue, eget feugiat elit nulla euismod ligula. In mollis viverra magna sed placerat.
+                 </div>
+
+                
 
               </div>
             </li>
@@ -68,24 +97,11 @@
                 <h5>University Paris-Est Créteil, France</h5>
                 <p>Lorem ipsum dolor sit amet, adipiscing elit. egestas.Vivamus sit amet ligula non lectus cursus egestas amet ligula non lectus cursus egestas. </p>
                 <!-- Button trigger modal -->
-                <p data-toggle="modal" data-target="#myModal" style = "cursor:pointer; color : blue">Learn more ...</p> 
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                      </div>
-                      <div class="modal-body">
-                        ...
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <p style = "color : blue ; cursor: pointer;">Learn more ...</p>
+
+                 <div class="section">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dolor magna, elementum sit amet adipiscing vitae, varius vitaeerat. Phasellus sodales, arcu sit amet facilisis condimentum, magna mifermentum augue, eget feugiat elit nulla euismod ligula. In mollis viverra magna sed placerat.
+                 </div>
+                
 
               </div>
             </li>
@@ -95,24 +111,11 @@
                 <h5>University of Béjaia, Algeria</h5>
                 <p>Lorem ipsum dolor sit amet, adipiscing elit. egestas.Vivamus sit amet ligula non lectus cursus egestas amet ligula non lectus cursus egestas. </p>
                 <!-- Button trigger modal -->
-                <p data-toggle="modal" data-target="#myModal" style = "cursor:pointer; color : blue">Learn more ...</p> 
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                      </div>
-                      <div class="modal-body">
-                        ...
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <p style = "color : blue ; cursor: pointer;">Learn more ...</p>
+
+                 <div class="section">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dolor magna, elementum sit amet adipiscing vitae, varius vitaeerat. Phasellus sodales, arcu sit amet facilisis condimentum, magna mifermentum augue, eget feugiat elit nulla euismod ligula. In mollis viverra magna sed placerat.
+                 </div>
+               
 
               </div>
             </li>
@@ -122,24 +125,11 @@
                 <h5>University of BÃ©jaia, Algeria</h5>
                 <p>Lorem ipsum dolor sit amet, adipiscing elit. egestas.Vivamus sit amet ligula non lectus cursus egestas amet ligula non lectus cursus egestas. </p>
                 <!-- Button trigger modal -->
-                <p data-toggle="modal" data-target="#myModal" style = "cursor:pointer; color : blue">Learn more ...</p> 
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                      </div>
-                      <div class="modal-body">
-                        ...
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>                                  
+                <p style = "color : blue ; cursor: pointer;">Learn more ...</p>
+
+                 <div class="section">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dolor magna, elementum sit amet adipiscing vitae, varius vitaeerat. Phasellus sodales, arcu sit amet facilisis condimentum, magna mifermentum augue, eget feugiat elit nulla euismod ligula. In mollis viverra magna sed placerat.
+                 </div>
+                                                
               </div>
             </li>
             <div class="clear"></div>
@@ -381,7 +371,8 @@
         </div>
 
       </div>
-
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
     </div>
   </body>
   </html>                                               
