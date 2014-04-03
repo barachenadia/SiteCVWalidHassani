@@ -9,7 +9,7 @@
 
 <body>
 
-  <div class="panel panel-default"  id ="panel_default">
+  <div class="panel panel-default" id ="panel_default">
     <div class="panel-heading">
       <h3 class="panel-title">
        <div class="bs-example">

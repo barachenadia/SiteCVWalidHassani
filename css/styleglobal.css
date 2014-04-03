@@ -1,25 +1,15 @@
- @font-face {
-    font-family: 'anonymous_proregular';
-    src: url('anonymous_pro-webfont.eot');
-    src: url('anonymous_pro-webfont.eot?#iefix') format('embedded-opentype'),
-         url('anonymous_pro-webfont.woff') format('woff'),
-         url('anonymous_pro-webfont.ttf') format('truetype'),
-         url('anonymous_pro-webfont.svg#anonymous_proregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-#font_anonymous{
+ 
+/*#font_anonymous{
   font-family: 'anonymous_proregular';
-}
+}*/
 
  body {
+   font-family: 'alex_brushregular';
     background-image:url(../images/bg3.png);
     background-color: #E8E8E8;
     margin: 0px;
     padding: 0px;
-    font-family:'Open Sans', Arial;
+    
     font-size: 12px;
   }
   .container {
@@ -109,8 +99,9 @@
   }
 
   .my-name {
-    font-size: 20px; 
+    font-size: 25px; 
     line-height: 20px;
+     font-family: 'alex_brushregular';
   }
   .my-profession {
     font-size: 18px;
@@ -259,3 +250,6 @@
     margin-top:50px; margin-left:42px; margin-bottom:5px;
   }
   
+  p{
+    font-size: 16px;
+  }

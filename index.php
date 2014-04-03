@@ -28,7 +28,7 @@
     <div class="tab-pane active" >
       <div class="row vcard-header">
         <div class="col-md-7" style=" margin-left:30px; margin-top:30px;  margin-buttom:60px;">
-          <h1 class="my-name">Walid HASSANI</h1>
+          <h1 class="my-name" style ="font-family: 'alex_brushregular'">WALID HASSANI</h1>
           <h2 class="my-profession">Ph.D in Biomedical Robotics</h2>
           <p class="my-message">
             <strong><span class="glyphicon glyphicon-comment"></span>&nbsp;Welcome</strong> Since my master degree, my research concerns assistance and rehabilitation by the means of exoskeletons. Challenging to achieve intention-based human-exoskeleton interaction.
