@@ -5,6 +5,44 @@
   <title>Walid HASSANI</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styleglobal.css">
+                
+
+
+                <!-- FANCYBOX -->
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+  <script>
+    !window.jQuery && document.write('<script src="jquery-1.4.3.min.js"><\/script>');
+  </script>
+  <script type="text/javascript" src="./fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+  <script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+  <link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="text/javascript">
+    $(document).ready(function() {
+     
+      /*
+      *   Examples - various
+      */
+
+      
+     
+      $("#various3").fancybox({
+        'width'       : '75%',
+        'height'      : '75%',
+        'autoScale'     : false,
+        'transitionIn'    : 'none',
+        'transitionOut'   : 'none',
+        'type'        : 'iframe'
+      });
+
+      
+    });
+  </script>
+
+
+                <!-- FANCYBOX -->
+
 </head>
 <body>
 
@@ -40,6 +78,23 @@
       </div>
     </div>
   </div>
+  
+<!-- FANCYBOX HTML -->
+
+<div id="content">
+  
+
+  <ul>
+    
+    <li><a id="various3" href="http://www.youtube.com/embed/L9szn1QQfas?autoplay=1">Iframe</a></li>
+    
+  </ul>
+
+
+ <!-- FANCYBOXHTML -->
+  
+
+
 </div>
 
 
