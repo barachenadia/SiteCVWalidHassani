@@ -374,5 +374,6 @@ $(document).ready(function () {
       <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
     </div>
+  </div>
   </body>
   </html>                                               

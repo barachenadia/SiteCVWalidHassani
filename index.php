@@ -1,52 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Walid HASSANI</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+    
+    <title>WALID HASSANI</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styleglobal.css">
-                
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/fancybox.css"/>
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,800,700,400italic|PT+Serif:400,400italic"/>
+    
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easytabs.min.js"></script>
+    <script type="text/javascript" src="js/respond.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easytabs.min.js"></script>   
+  <script type="text/javascript" src="js/jquery.adipoli.min.js"></script>
+    <script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="js/jquery.gmap.min.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
 
 
-                <!-- FANCYBOX -->
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-  <script>
-    !window.jQuery && document.write('<script src="jquery-1.4.3.min.js"><\/script>');
-  </script>
-  <script type="text/javascript" src="./fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
-  <script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-  <link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.4.css" media="screen" />
-  <link rel="stylesheet" href="style.css" />
-  <script type="text/javascript">
-    $(document).ready(function() {
-     
-      /*
-      *   Examples - various
-      */
-
+    
+<!-- Shared on MafiaShare.net  --><!-- Shared on MafiaShare.net  --></head>
+    <body>
       
-     
-      $("#various3").fancybox({
-        'width'       : '75%',
-        'height'      : '75%',
-        'autoScale'     : false,
-        'transitionIn'    : 'none',
-        'transitionOut'   : 'none',
-        'type'        : 'iframe'
-      });
 
-      
-    });
-  </script>
-
-
-                <!-- FANCYBOX -->
-
-</head>
-<body>
-
-  <div class="panel panel-default" id="panel_default">
+      <!-- HEADER AND BODY PANEL  -->
+       <div class="panel panel-default" id="panel_default">
   
   <div class="panel-heading" >
     <h3 class="panel-title">
@@ -79,26 +66,89 @@
     </div>
   </div>
   
-<!-- FANCYBOX HTML -->
-
-<div id="content">
-  
-
-  <ul>
-    
-    <li><a id="various3" href="http://www.youtube.com/embed/L9szn1QQfas?autoplay=1">Iframe</a></li>
-    
-  </ul>
-
-
- <!-- FANCYBOXHTML -->
-  
-
-
-</div>
+                
+      <!-- HEADER AND BODY"PANEL -->
 
 
 
+                <!-- Portfolio -->
+                <div id="portfolio">
 
-</body>
-</html>                                               
+                     
+                    <div class="extra-text"><h1>Some of the projects</h1> </div>
+                    <ul id="portfolio-list">
+                        <li class="illustration print">
+                            <a href="portfolio/1.jpg" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis mi eu elit tempor facilisis id et neque" rel="portfolio" class="folio">
+                                <img src="portfolio/1-thumb.jpg" alt="">
+                                <h2 class="title">Hello Goodbye</h2>
+                                <span class="categorie">Print / Illustration</span> 
+                            </a>
+                      </li>
+                        <li class="webdesign">
+                            <a href="http://www.youtube.com/embed/c9MnSeYYtYY?autoplay=1" rel="portfolio" class="folio iframe">
+                                <img src="portfolio/3-thumb.jpg" alt="" >
+                                <h2 class="title">Snow time</h2>
+                                <span class="categorie">Webdesign</span> 
+                            </a>
+                      </li>                        
+                        <li class="photoghraphy">
+                            <a href="http://www.google.com" rel="portfolio" target="_new">
+                                <img src="portfolio/2-thumb.jpg" alt="" >                            
+                                <h2 class="title">Help us</h2>
+                                <span class="categorie">Photography</span> 
+                            </a>
+                      </li>
+                        <li class="animation print">
+                            <a href="portfolio/4.jpg" rel="portfolio" class="folio">
+                                <img src="portfolio/4-thumb.jpg" alt="" >
+                                <h2 class="title">Sunshine</h2>
+                                <span class="categorie">Print / Animation</span> 
+                            </a>
+                      </li>
+                        <li class="animation">
+                            <a href="portfolio/5.jpg" rel="portfolio" class="folio">
+                                <img src="portfolio/5-thumb.jpg" alt="" >
+                                <h2 class="title">Come together</h2>
+                                <span class="categorie">Animation</span> 
+                            </a>
+                      </li>
+                        <li class="webdesign print">
+                            <a href="portfolio/6.jpg" rel="portfolio" class="folio">
+                                <img src="portfolio/6-thumb.jpg" alt="" >
+                                <h2 class="title">The yellow</h2>
+                                <span class="categorie">Webdesign / Print</span> 
+                            </a>
+                      </li>
+                        <li class="photoghraphy">
+                            <a href="portfolio/7.jpg" rel="portfolio" class="folio">
+                                <img src="portfolio/7-thumb.jpg" alt="" >
+                                <h2 class="title">Black bird</h2>
+                                <span class="categorie">Photoghraphy</span> 
+                            </a>
+                      </li>
+                        <li class="illustration">
+                            <a href="portfolio/8.jpg" rel="portfolio" class="folio">
+                                <img src="portfolio/8-thumb.jpg" alt="" >
+                                <h2 class="title">Revolution</h2>
+                                <span class="categorie">Illustration</span> 
+                            </a>
+                      </li>
+                    </ul>
+
+                </div>
+                <!-- /Portfolio -->   
+                
+                
+            <!-- /Content -->
+            
+            <!-- Footer -->
+      <div class="footer">
+              <div class="copyright">Copyright © 2014 Walid Hassani</div>
+            </div>
+            <!-- /Footer --> 
+            
+        </div>
+    <!-- /Container -->
+
+    </body>
+  </html>

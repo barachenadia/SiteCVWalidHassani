@@ -2,11 +2,11 @@
 		/* Base styles	 */
 	/*-------------------------------------------------------*/
 	body {
-		background-image:url(../images/bg1.png);
+		background-image:url(../images/bg3.png);
 		background-color: #E8E8E8;
 		margin: 0px;
 		padding: 0px;
-	 
+		font-family:'Open Sans', Arial;
 		font-size: 12px;
 	}
 	/*-------------------------------------------------------*/
